@@ -6,7 +6,7 @@ public class MovingPlatform : MonoBehaviour
 {
     public Transform pointA;
     public Transform pointB;
-    public float moveSpeed = 2f;
+    public float moveSpeed = 4f;
 
     private Vector3 nextPosition;
     // Start is called before the first frame update

@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Ladder
   layers:
   - Default
   - TransparentFX
@@ -44,6 +45,9 @@ TagManager:
     locked: 0
   - name: SolidBG
     uniqueID: 2393275563
+    locked: 0
+  - name: Water
+    uniqueID: 2988121605
     locked: 0
   - name: TreesBg2
     uniqueID: 3062213397
