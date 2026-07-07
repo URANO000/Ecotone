@@ -3,12 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-    [Header("Scene")]
+    [Header("Scene Names")]
     [SerializeField] private string firstLevelSceneName = "Bioma Bosque";
-
-    [Header("Panels")]
-    [SerializeField] private GameObject mainButtonsPanel;
-    [SerializeField] private GameObject optionsPanel;
+    [SerializeField] private string optionsMenuSceneName = "OptionMenu";
+    [SerializeField] private string mainMenuSceneName = "MainMenu";
 
     public void StartGame()
     {
@@ -17,22 +15,12 @@ public class MainMenuController : MonoBehaviour
 
     public void OpenOptions()
     {
-        mainButtonsPanel.SetActive(false);
-
-        if (optionsPanel != null)
-        {
-            optionsPanel.SetActive(true);
-        }
+        SceneManager.LoadScene(optionsMenuSceneName);
     }
 
-    public void BackToMenu()
+    public void BackToMainMenu()
     {
-        if (optionsPanel != null)
-        {
-            optionsPanel.SetActive(false);
-        }
-
-        mainButtonsPanel.SetActive(true);
+        SceneManager.LoadScene(mainMenuSceneName);
     }
 
     public void QuitGame()
