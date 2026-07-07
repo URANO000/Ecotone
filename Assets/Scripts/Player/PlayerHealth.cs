@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 5;
+    [SerializeField] private HealthBar healthBar;
 
     private int currentHealth;
 
@@ -11,20 +12,38 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
     }
 
+    private void Start()
+    {
+        if (healthBar != null)
+        {
+            healthBar.SetMaxHealth(maxHealth);
+        }
+    }
+
+    private bool isDead = false;
+
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        if (isDead) return;
 
+        currentHealth -= damage;
         Debug.Log("GusGus recibió daño. Vida actual: " + currentHealth);
+
+        if (healthBar != null)
+        {
+            healthBar.SetHealth(currentHealth);
+        }
 
         if (currentHealth <= 0)
         {
+            currentHealth = 0;
             Die();
         }
     }
 
     private void Die()
     {
+        isDead = true;
         Debug.Log("GusGus murió.");
     }
 }
