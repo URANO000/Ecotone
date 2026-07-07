@@ -5,7 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: e36acabbb33085742859497290a4aa3f
+  - enabled: 1
+    path: Assets/Scenes/Bioma Bosque.unity
+    guid: 6c2d0254c83c5264082d6f7153f241de
   m_configObjects: {}
