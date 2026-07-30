@@ -29,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
     bool isFacingRight = true;
     bool isGrounded;
 
+    public PlayerCombat playerCombat;
+
 
     void Start()
     {
@@ -47,6 +49,11 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetFloat("yVelocity", rb.velocity.y);
         animator.SetFloat("speed", Mathf.Abs(rb.velocity.x));
+
+        if (Input.GetButtonDown("Hit"))
+        {
+            playerCombat.Attack();
+        }
     }
 
     public void Gravity()

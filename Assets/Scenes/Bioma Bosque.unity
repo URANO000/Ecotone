@@ -442,7 +442,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 103966419}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PointBird
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -473,7 +473,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 112463152}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PointA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -504,7 +504,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 118459753}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trifectus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -544,7 +544,9 @@ GameObject:
   - component: {fileID: 148877371}
   - component: {fileID: 148877373}
   - component: {fileID: 148877374}
-  m_Layer: 0
+  - component: {fileID: 148877375}
+  - component: {fileID: 148877376}
+  m_Layer: 6
   m_Name: SnakeEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -769,6 +771,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   attackCooldown: 1.8
+--- !u!114 &148877375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148877361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7fd9b28ddb53141af356cca1cf1a46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+--- !u!114 &148877376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148877361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bece173c9bc1c1a45a371d836b10157b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &154008689
 GameObject:
   m_ObjectHideFlags: 0
@@ -19399,7 +19426,9 @@ GameObject:
   - component: {fileID: 477532813}
   - component: {fileID: 477532812}
   - component: {fileID: 477532811}
-  m_Layer: 0
+  - component: {fileID: 477532816}
+  - component: {fileID: 477532817}
+  m_Layer: 6
   m_Name: Trifectus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19608,6 +19637,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &477532816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477532807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7fd9b28ddb53141af356cca1cf1a46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+--- !u!114 &477532817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477532807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bece173c9bc1c1a45a371d836b10157b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &481836795
 GameObject:
   m_ObjectHideFlags: 0
@@ -22204,6 +22258,7 @@ GameObject:
   - component: {fileID: 1128357049}
   - component: {fileID: 1128357051}
   - component: {fileID: 1128357052}
+  - component: {fileID: 1128357053}
   m_Layer: 0
   m_Name: GusGus
   m_TagString: Player
@@ -22293,11 +22348,12 @@ Transform:
   m_GameObject: {fileID: 1128357043}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 113.28, y: -15.01, z: 0}
+  m_LocalPosition: {x: 142.89, y: -14.42, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1721205800}
+  - {fileID: 1295118664}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1128357047
@@ -22397,6 +22453,7 @@ MonoBehaviour:
   baseGravity: 2
   maxFallSpeed: 18
   fallGravityMult: 2
+  playerCombat: {fileID: 1128357053}
 --- !u!114 &1128357051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22513,6 +22570,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 5
   animator: {fileID: 1128357044}
+--- !u!114 &1128357053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128357043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65e42e7348674b54898496b230453e3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPoint: {fileID: 1295118664}
+  attackRange: 0.3
+  knockbackForce: 10
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  damage: 1
+  animator: {fileID: 1128357044}
+  cooldown: 2
 --- !u!1 &1136729062
 GameObject:
   m_ObjectHideFlags: 0
@@ -23233,7 +23311,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1241958539}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bird
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23426,6 +23504,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1295118663
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1295118664}
+  m_Layer: 0
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1295118664
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295118663}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.301, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1128357046}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1299343374
 GameObject:
   m_ObjectHideFlags: 0
@@ -24189,7 +24298,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1473028725}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PointB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24226,7 +24335,9 @@ GameObject:
   - component: {fileID: 1502001024}
   - component: {fileID: 1502001023}
   - component: {fileID: 1502001022}
-  m_Layer: 0
+  - component: {fileID: 1502001025}
+  - component: {fileID: 1502001026}
+  m_Layer: 6
   m_Name: Bird
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24423,6 +24534,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1502001025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502001017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7fd9b28ddb53141af356cca1cf1a46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+--- !u!114 &1502001026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502001017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bece173c9bc1c1a45a371d836b10157b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1507631719
 GameObject:
   m_ObjectHideFlags: 0
@@ -73931,7 +74067,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2003086372}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Snake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74113,7 +74249,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2132701381}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PointABird
   m_TagString: Untagged
   m_Icon: {fileID: 0}
