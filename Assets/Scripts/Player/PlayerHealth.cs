@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -6,6 +7,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private HealthBar healthBar;
 
     private int currentHealth;
+
+    public Animator animator;
 
     private void Awake()
     {
@@ -45,5 +48,19 @@ public class PlayerHealth : MonoBehaviour
     {
         isDead = true;
         Debug.Log("GusGus murió.");
+        animator.SetTrigger("die");
+
+        if (GameManager.Instance != null)
+        {
+            Debug.Log("Hello, I work");
+            StartCoroutine(ShowGameOverAfterDelay());
+        }
+    }
+
+    private IEnumerator ShowGameOverAfterDelay()
+    {
+        yield return new WaitForSeconds(2f);
+
+        GameManager.Instance?.GameOver();
     }
 }

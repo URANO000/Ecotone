@@ -19,7 +19,7 @@ public class MovingPlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, nextPosition, moveSpeed = Time.deltaTime);   
+        transform.position = Vector3.MoveTowards(transform.position, nextPosition, moveSpeed * Time.deltaTime);   
         if(transform.position == nextPosition)
         {
             nextPosition = (nextPosition == pointA.position) ? pointB.position : pointA.position;
