@@ -18,16 +18,12 @@ public class MusicManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void PlayTrack(AudioClip clip)
+    public void PlayTrack(AudioClip clip, float volume = 1f)
     {
-        if (musicSource.clip == clip) return; // ya está sonando, no reinicies
+        if (musicSource.clip == clip) return;
 
         musicSource.clip = clip;
-        musicSource.Play();
-    }
-
-    public void SetVolume(float volume)
-    {
         musicSource.volume = Mathf.Clamp01(volume);
+        musicSource.Play();
     }
 }
