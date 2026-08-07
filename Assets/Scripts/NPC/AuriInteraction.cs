@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -10,12 +11,18 @@ public class AuriInteraction : MonoBehaviour
 
     [Header("Dialogue")]
     [TextArea(3, 6)]
-    [SerializeField]
-    private string dialogueMessage =
-        "Auri:\nBienvenido al bosque, Gusgus.\n\nExplora con cuidado, salta entre plataformas y observa el entorno.\nAlgunos caminos no se resuelven corriendo, sino pensando.";
+    [Header("Dialogue")]
+    [SerializeField] private string[] dialoguePages;
+
+    [Header("Typewriter Settings")]
+    [SerializeField] private float typingSpeed = 0.035f;
 
     private bool playerInRange;
     private bool dialogueOpen;
+    private bool isTyping;
+
+    private int currentPageIndex;
+    private Coroutine typingCoroutine;
 
     private void Start()
     {
@@ -24,45 +31,58 @@ public class AuriInteraction : MonoBehaviour
 
         if (dialoguePanel != null)
             dialoguePanel.SetActive(false);
+
+        if (dialogueText != null)
+            dialogueText.text = "";
     }
 
     private void Update()
     {
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))
+        if (!playerInRange || !Input.GetKeyDown(KeyCode.E))
+            return;
+
+        if (!dialogueOpen)
         {
-            if (dialogueOpen)
-                CloseDialogue();
-            else
-                ShowDialogue();
+            StartDialogue();
+            return;
         }
+
+        if (isTyping)
+        {
+            CompleteCurrentPage();
+            return;
+        }
+
+        ShowNextPage();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = true;
+        if (!other.CompareTag("Player"))
+            return;
 
-            if (!dialogueOpen && interactionPrompt != null)
-                interactionPrompt.SetActive(true);
-        }
+        playerInRange = true;
+
+        if (!dialogueOpen && interactionPrompt != null)
+            interactionPrompt.SetActive(true);
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = false;
-            CloseDialogue();
+        if (!other.CompareTag("Player"))
+            return;
 
-            if (interactionPrompt != null)
-                interactionPrompt.SetActive(false);
-        }
+        playerInRange = false;
+        CloseDialogue();
+
+        if (interactionPrompt != null)
+            interactionPrompt.SetActive(false);
     }
 
-    private void ShowDialogue()
+    private void StartDialogue()
     {
         dialogueOpen = true;
+        currentPageIndex = 0;
 
         if (interactionPrompt != null)
             interactionPrompt.SetActive(false);
@@ -70,16 +90,67 @@ public class AuriInteraction : MonoBehaviour
         if (dialoguePanel != null)
             dialoguePanel.SetActive(true);
 
-        if (dialogueText != null)
-            dialogueText.text = dialogueMessage;
+        StartTypingPage();
+    }
+
+    private void ShowNextPage()
+    {
+        currentPageIndex++;
+
+        if (currentPageIndex >= dialoguePages.Length)
+        {
+            CloseDialogue();
+            return;
+        }
+
+        StartTypingPage();
+    }
+
+    private void StartTypingPage()
+    {
+        if (typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+
+        typingCoroutine = StartCoroutine(TypePage(dialoguePages[currentPageIndex]));
+    }
+
+    private IEnumerator TypePage(string pageText)
+    {
+        isTyping = true;
+        dialogueText.text = "";
+
+        foreach (char letter in pageText)
+        {
+            dialogueText.text += letter;
+            yield return new WaitForSeconds(typingSpeed);
+        }
+
+        isTyping = false;
+    }
+
+    private void CompleteCurrentPage()
+    {
+        if (typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+
+        dialogueText.text = dialoguePages[currentPageIndex];
+        isTyping = false;
     }
 
     private void CloseDialogue()
     {
         dialogueOpen = false;
+        isTyping = false;
+        currentPageIndex = 0;
+
+        if (typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
 
         if (dialoguePanel != null)
             dialoguePanel.SetActive(false);
+
+        if (dialogueText != null)
+            dialogueText.text = "";
 
         if (playerInRange && interactionPrompt != null)
             interactionPrompt.SetActive(true);
