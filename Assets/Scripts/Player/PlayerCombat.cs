@@ -11,6 +11,7 @@ public class PlayerCombat : MonoBehaviour
     public int damage = 1;
 
     public Animator animator;
+    public PlayerAudio playerAudio;
     public float cooldown = 0.2f;
     private float timer;
 
@@ -27,6 +28,7 @@ public class PlayerCombat : MonoBehaviour
         if(timer <= 0)
         {
             animator.SetBool("isAttacking", true);
+            playerAudio.OnAttack();
 
             Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
 
