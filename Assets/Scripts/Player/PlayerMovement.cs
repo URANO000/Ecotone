@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     bool isGrounded;
 
     public PlayerCombat playerCombat;
+    public PlayerAudio playerAudio; 
 
 
     void Start()
@@ -85,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jumpPower);
                 jumpsRemaining--;
                 animator.SetTrigger("jump");
+                playerAudio.OnJump();
             }
             else if (context.canceled && rb.velocity.y > 0)
             {
