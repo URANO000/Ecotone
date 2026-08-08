@@ -44,6 +44,25 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void Heal(int amount)
+    {
+        if (isDead) return;
+
+        currentHealth += amount;
+
+        if(healthBar != null)
+        {
+            healthBar.SetHealth(currentHealth);
+        }
+
+        if(currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+
+        Debug.Log("GusGus recibió curación. Vida actual: " + currentHealth);
+    }
+
     private void Die()
     {
         isDead = true;
