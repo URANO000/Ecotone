@@ -10,6 +10,12 @@ public class PlayerHealth : MonoBehaviour
 
     public Animator animator;
 
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private float flashDuration = 0.15f;
+    [SerializeField] private int flashCount = 3;
+
+    private Color normalColor;
+
     private void Awake()
     {
         currentHealth = maxHealth;
@@ -21,6 +27,13 @@ public class PlayerHealth : MonoBehaviour
         {
             healthBar.SetMaxHealth(maxHealth);
         }
+
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+
+        normalColor = spriteRenderer.color;
     }
 
     private bool isDead = false;
@@ -37,6 +50,8 @@ public class PlayerHealth : MonoBehaviour
             healthBar.SetHealth(currentHealth);
         }
 
+        StartCoroutine(FlashColor(Color.red));
+
         if (currentHealth <= 0)
         {
             currentHealth = 0;
@@ -50,17 +65,19 @@ public class PlayerHealth : MonoBehaviour
 
         currentHealth += amount;
 
-        if(healthBar != null)
-        {
-            healthBar.SetHealth(currentHealth);
-        }
-
-        if(currentHealth > maxHealth)
+        if (currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
         }
 
         Debug.Log("GusGus recibió curación. Vida actual: " + currentHealth);
+
+        StartCoroutine(FlashColor(Color.green));
+
+        if (healthBar != null)
+        {
+            healthBar.SetHealth(currentHealth);
+        }
     }
 
     private void Die()
@@ -81,5 +98,19 @@ public class PlayerHealth : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         GameManager.Instance?.GameOver();
+    }
+
+    private IEnumerator FlashColor(Color flashColor)
+    {
+        for (int i = 0; i < flashCount; i++)
+        {
+            spriteRenderer.color = flashColor;
+
+            yield return new WaitForSeconds(flashDuration);
+
+            spriteRenderer.color = normalColor;
+
+            yield return new WaitForSeconds(flashDuration);
+        }
     }
 }
