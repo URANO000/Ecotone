@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FlipWalk : MonoBehaviour
@@ -8,19 +6,29 @@ public class FlipWalk : MonoBehaviour
     public Transform pointB;
     public float moveSpeed = 4f;
 
-    private Vector3 nextPosition;
+    private Rigidbody2D rb;
+    private Vector2 nextPosition;
     private bool isMovingToB = true;
-    // Start is called before the first frame update
+
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         nextPosition = pointB.position;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, nextPosition, moveSpeed * Time.deltaTime);
-        if (transform.position == nextPosition)
+        Vector2 currentPosition = rb.position;
+
+        Vector2 newPosition = Vector2.MoveTowards(
+            currentPosition,
+            nextPosition,
+            moveSpeed * Time.fixedDeltaTime
+        );
+
+        rb.MovePosition(newPosition);
+
+        if (newPosition == nextPosition)
         {
             if (isMovingToB)
             {
@@ -37,7 +45,6 @@ public class FlipWalk : MonoBehaviour
                 FlipSprite(-1);
             }
         }
-
     }
 
     void FlipSprite(int direction)

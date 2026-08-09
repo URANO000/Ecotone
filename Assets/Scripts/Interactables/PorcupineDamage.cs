@@ -5,6 +5,10 @@ using UnityEngine;
 public class PorcupineDamage : MonoBehaviour
 {
     [SerializeField] private int damageAmount = 1;
+    public float knockbackForce = 5;
+
+    public float cooldown = 0.2f;
+    private float timer;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +18,10 @@ public class PorcupineDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (timer > 0)
+        {
+            timer -= Time.deltaTime;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -25,9 +32,19 @@ public class PorcupineDamage : MonoBehaviour
 
             if (playerHealth != null)
             {
-                playerHealth.TakeDamage(damageAmount);
+               if(timer <= 0)
+                {
+                    playerHealth.TakeDamage(damageAmount);
 
-                Destroy(gameObject);
+                    // Knockback effect
+                    Playerknockback playerKnockback = other.GetComponent<Playerknockback>();
+                    if (playerKnockback != null)
+                    {
+                        playerKnockback.Knockback(transform, knockbackForce);
+                    }
+
+                    timer = cooldown;
+                }
             }
         }
     }
