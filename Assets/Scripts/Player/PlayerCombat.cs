@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
@@ -15,24 +13,52 @@ public class PlayerCombat : MonoBehaviour
     public float cooldown = 0.2f;
     private float timer;
 
+    public bool hasStick;
+
+    [SerializeField] private SpriteRenderer stickRenderer;
+
+    private void Start()
+    {
+        stickRenderer.enabled = hasStick;
+    }
+
     private void Update()
     {
-        if(timer > 0)
+        if (timer > 0)
         {
             timer -= Time.deltaTime;
         }
     }
 
+    public void EquipStick()
+    {
+        hasStick = true;
+        stickRenderer.enabled = true;
+    }
+
     public void Attack()
     {
-        if(timer <= 0)
+        if (timer <= 0)
         {
-            animator.SetBool("isAttacking", true);
+            if (hasStick)
+            {
+                animator.SetBool("isAttackingStick", true);
+
+
+                Debug.Log(
+                    "AttackStick triggered. Current state: " +
+                    animator.GetCurrentAnimatorStateInfo(0).shortNameHash
+                );
+            }
+            else
+            {
+                animator.SetBool("isAttacking", true);
+            }
             playerAudio.OnAttack();
 
             Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
 
-            if(enemies.Length > 0)
+            if (enemies.Length > 0)
             {
                 enemies[0].GetComponent<EnemyHealth>().TakeDamage(damage);
                 enemies[0].GetComponent<EnemyKnockback>().Knockback(transform, knockbackForce);
@@ -44,7 +70,14 @@ public class PlayerCombat : MonoBehaviour
 
     public void FinishAttacking()
     {
-        animator.SetBool("isAttacking", false);
+        if (hasStick)
+        {
+            animator.SetBool("isAttackingStick", false);
+        }
+        else
+        {
+            animator.SetBool("isAttacking", false);
+        }
     }
 
     private void OnDrawGizmosSelected()
