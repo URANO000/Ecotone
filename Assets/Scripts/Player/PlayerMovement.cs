@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     bool isGrounded;
 
     public PlayerCombat playerCombat;
-    public PlayerAudio playerAudio; 
+    public PlayerAudio playerAudio;
 
 
     void Start()
