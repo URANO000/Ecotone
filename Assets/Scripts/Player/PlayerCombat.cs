@@ -42,17 +42,15 @@ public class PlayerCombat : MonoBehaviour
         {
             if (hasStick)
             {
-                animator.SetBool("isAttackingStick", true);
+                animator.SetTrigger("AttackStick");
 
-
-                Debug.Log(
-                    "AttackStick triggered. Current state: " +
-                    animator.GetCurrentAnimatorStateInfo(0).shortNameHash
-                );
+                Debug.Log("AttackStick trigger sent");
             }
             else
             {
-                animator.SetBool("isAttacking", true);
+                animator.SetTrigger("Attack");
+
+                Debug.Log("Attack trigger sent");
             }
             playerAudio.OnAttack();
 
@@ -65,18 +63,6 @@ public class PlayerCombat : MonoBehaviour
             }
 
             timer = cooldown;
-        }
-    }
-
-    public void FinishAttacking()
-    {
-        if (hasStick)
-        {
-            animator.SetBool("isAttackingStick", false);
-        }
-        else
-        {
-            animator.SetBool("isAttacking", false);
         }
     }
 
