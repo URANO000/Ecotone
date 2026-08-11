@@ -21,6 +21,9 @@ public class PlayerHealth : MonoBehaviour
     private void Awake()
     {
         currentHealth = maxHealth;
+
+        rb = GetComponent<Rigidbody2D>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     private void Start()
@@ -100,7 +103,7 @@ public class PlayerHealth : MonoBehaviour
 
     private IEnumerator ShowGameOverAfterDelay()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
 
         GameManager.Instance?.GameOver();
     }
