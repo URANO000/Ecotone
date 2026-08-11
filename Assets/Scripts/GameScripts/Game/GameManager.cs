@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,12 +6,18 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    [Header("Game Over UI")]
     public GameObject gameOverPanel;
     public Button reiniciarButton;
     public Button menuButton;
 
+    [Header("Win UI")]
+    public GameObject winPanel;
+    public Button winReiniciarButton;
+    public Button winMenuButton;
+
     private bool gameOverActivo = false;
-    // Start is called before the first frame update
+    private bool winActivo = false;
 
     private void Awake()
     {
@@ -30,26 +33,37 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        if(gameOverPanel != null)
+        Time.timeScale = 1f;
+
+        if (gameOverPanel != null)
         {
             gameOverPanel.SetActive(false);
         }
 
-        if(reiniciarButton != null)
+        if (winPanel != null)
+        {
+            winPanel.SetActive(false);
+        }
+
+        if (reiniciarButton != null)
         {
             reiniciarButton.onClick.AddListener(TryAgain);
         }
 
-        if(menuButton != null)
+        if (menuButton != null)
         {
             menuButton.onClick.AddListener(GoToMenu);
         }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (winReiniciarButton != null)
+        {
+            winReiniciarButton.onClick.AddListener(TryAgain);
+        }
+
+        if (winMenuButton != null)
+        {
+            winMenuButton.onClick.AddListener(GoToMenu);
+        }
     }
 
     public void GameOver()
@@ -58,10 +72,26 @@ public class GameManager : MonoBehaviour
 
         gameOverActivo = true;
 
-        if(gameOverPanel != null)
+        if (gameOverPanel != null)
         {
             gameOverPanel.SetActive(true);
         }
+
+        Time.timeScale = 0f;
+    }
+
+    public void WinLevel()
+    {
+        if (winActivo) return;
+
+        winActivo = true;
+
+        if (winPanel != null)
+        {
+            winPanel.SetActive(true);
+        }
+
+        Time.timeScale = 0f;
     }
 
     public void TryAgain()
