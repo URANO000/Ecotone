@@ -22958,7 +22958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10bfcb4327fa9cf46969d520c82a690d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
+  damage: 15
   attackCooldown: 2
 --- !u!114 &477532812
 MonoBehaviour:
@@ -22972,7 +22972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af514c3eb6e0e9a4088afa5e799d1b6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseSpeed: 1
+  chaseSpeed: 2
   spriteFacesRight: 0
 --- !u!114 &477532813
 MonoBehaviour:
@@ -22986,7 +22986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 497e782fba14da5419af48dfa4bd4bf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 5
+  detectionRange: 9
   attackRange: 2.8
 --- !u!61 &477532814
 BoxCollider2D:
@@ -23072,7 +23072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7fd9b28ddb53141af356cca1cf1a46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 100
 --- !u!114 &477532817
 MonoBehaviour:
   m_ObjectHideFlags: 0
