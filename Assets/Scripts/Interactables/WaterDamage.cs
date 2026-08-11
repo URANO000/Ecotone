@@ -24,6 +24,7 @@ public class WaterDamage : MonoBehaviour
             PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
             if(playerHealth != null)
             {
+                playerHealth.waterDie = true;
                 Debug.Log("Player entered water.");
                 playerHealth.TakeDamage(damageAmount);
             }

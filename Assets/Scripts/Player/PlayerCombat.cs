@@ -3,10 +3,10 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     public Transform attackPoint;
-    public float attackRange = 1;
-    public float knockbackForce = 50;
+    public float attackRange = 0.3f;
+    public float knockbackForce = 5;
     public LayerMask enemyLayer;
-    public int damage = 5;
+    public int damage = 7;
 
     public Animator animator;
     public PlayerAudio playerAudio;
@@ -60,7 +60,7 @@ public class PlayerCombat : MonoBehaviour
             {
                 if (hasStick)
                 {
-                    damage = 10;
+                    damage = 15;
                 }
                 enemies[0].GetComponent<EnemyHealth>().TakeDamage(damage);
                 enemies[0].GetComponent<EnemyKnockback>().Knockback(transform, knockbackForce);

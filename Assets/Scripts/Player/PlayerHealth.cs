@@ -17,6 +17,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int flashCount = 3;
 
     private Color normalColor;
+    public bool waterDie = false;
 
     private void Awake()
     {
@@ -89,7 +90,14 @@ public class PlayerHealth : MonoBehaviour
     {
         isDead = true;
         Debug.Log("GusGus murió.");
-        animator.SetTrigger("die");
+        if (waterDie)
+        {
+            animator.SetTrigger("waterDie");
+        }
+        else
+        {
+            animator.SetTrigger("die");
+        }
 
         if (rb != null) { rb.velocity = Vector2.zero; }
         if (playerMovement != null) { playerMovement.enabled = false; }
