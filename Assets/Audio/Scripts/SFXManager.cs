@@ -47,6 +47,14 @@ public class SFXManager : MonoBehaviour
     private int lastDamageIndex = -1;
     private int lastGrassIndex = -1;
 
+    [Header("Puzzle: Sello del Bosque")]
+    [SerializeField] private AudioClip[] symbolChimeClips; 
+    [SerializeField] private AudioClip puzzleClickClip;
+    [SerializeField] private AudioClip puzzleCorrectClip;
+    [SerializeField] private AudioClip puzzleWrongClip;
+    [SerializeField] private AudioClip puzzleSuccessClip;
+    [SerializeField] private AudioClip puzzleFailClip;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -152,6 +160,17 @@ public class SFXManager : MonoBehaviour
         PlayOneShotWithPitch(grassClips[lastGrassIndex], 0.6f);
     }
 
+    public void PlaySymbolChime(int index)
+    {
+        if (symbolChimeClips == null || symbolChimeClips.Length <= index) return;
+        PlayOneShotWithPitch(symbolChimeClips[index]);
+    }
+
+    public void PlayPuzzleClick() => PlayOneShotWithPitch(puzzleClickClip);
+    public void PlayPuzzleCorrect() => PlayOneShotWithPitch(puzzleCorrectClip);
+    public void PlayPuzzleWrong() => PlayOneShotWithPitch(puzzleWrongClip);
+    public void PlayPuzzleSuccess() => PlayOneShotWithPitch(puzzleSuccessClip);
+    public void PlayPuzzleFail() => PlayOneShotWithPitch(puzzleFailClip);
 
     public void PlaySnakeAttack() => PlayOneShotWithPitch(snakeAttack);
 
