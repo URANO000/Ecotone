@@ -18,17 +18,12 @@ public class EnemyChase : MonoBehaviour
 
     private void Update()
     {
-        if (animator != null)
-        {
-            animator.SetBool("Running", true);
-        }
-
         if (enemyBrain == null || enemyBrain.Player == null)
         {
             return;
         }
 
-        if (!enemyBrain.PlayerDetected || enemyBrain.PlayerInAttackRange)
+        if (!enemyBrain.PlayerDetected)
         {
             if (animator != null)
             {
@@ -38,12 +33,31 @@ public class EnemyChase : MonoBehaviour
             return;
         }
 
+        if (enemyBrain.PlayerInAttackRange)
+        {
+            if (animator != null)
+            {
+                animator.SetBool("Running", false);
+            }
 
+            return;
+        }
 
-        float directionX = enemyBrain.Player.position.x - transform.position.x;
+        if (animator != null)
+        {
+            animator.SetBool("Running", true);
+        }
+
+        float directionX =
+            enemyBrain.Player.position.x - transform.position.x;
 
         Vector3 newPosition = transform.position;
-        newPosition.x += Mathf.Sign(directionX) * chaseSpeed * Time.deltaTime;
+
+        newPosition.x +=
+            Mathf.Sign(directionX) *
+            chaseSpeed *
+            Time.deltaTime;
+
         transform.position = newPosition;
 
         if (spriteRenderer != null)
