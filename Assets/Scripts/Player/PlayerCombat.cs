@@ -6,7 +6,7 @@ public class PlayerCombat : MonoBehaviour
     public float attackRange = 1;
     public float knockbackForce = 50;
     public LayerMask enemyLayer;
-    public int damage = 1;
+    public int damage = 5;
 
     public Animator animator;
     public PlayerAudio playerAudio;
@@ -58,6 +58,10 @@ public class PlayerCombat : MonoBehaviour
 
             if (enemies.Length > 0)
             {
+                if (hasStick)
+                {
+                    damage = 10;
+                }
                 enemies[0].GetComponent<EnemyHealth>().TakeDamage(damage);
                 enemies[0].GetComponent<EnemyKnockback>().Knockback(transform, knockbackForce);
             }

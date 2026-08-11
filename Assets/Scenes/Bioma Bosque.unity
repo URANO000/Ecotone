@@ -27590,7 +27590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fba5d70dbd76dfe4499dc5c571385b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 100
   healthBar: {fileID: 1433310524}
   animator: {fileID: 1128357044}
   spriteRenderer: {fileID: 0}

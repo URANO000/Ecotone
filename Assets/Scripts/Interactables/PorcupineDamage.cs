@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PorcupineDamage : MonoBehaviour
 {
-    [SerializeField] private int damageAmount = 1;
+    [SerializeField] private int damageAmount = 5;
     public float knockbackForce = 5;
 
     public float cooldown = 0.2f;
