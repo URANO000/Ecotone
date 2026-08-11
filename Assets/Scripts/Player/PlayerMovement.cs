@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
@@ -40,11 +39,15 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (PauseManager.Instance != null && PauseManager.Instance.IsPaused) return;
+
         rb.velocity = new Vector2(horizontalMovement * moveSpeed, rb.velocity.y);
     }
 
     void Update()
     {
+        if (PauseManager.Instance != null && PauseManager.Instance.IsPaused) return;
+
         GroundCheck();
         Gravity();
         Flip();
@@ -74,11 +77,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
+        if (PauseManager.Instance != null && PauseManager.Instance.IsPaused) return;
         horizontalMovement = context.ReadValue<Vector2>().x;
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
+        if (PauseManager.Instance != null && PauseManager.Instance.IsPaused) return;
+
         if (jumpsRemaining > 0)
         {
             if (context.performed)

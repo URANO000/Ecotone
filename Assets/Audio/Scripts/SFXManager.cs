@@ -11,27 +11,29 @@ public class SFXManager : MonoBehaviour
     private const string SFX_VOLUME_PARAM = "SFXVolume";
     private const string SFX_VOLUME_PREF_KEY = "SFXVolume";
 
+    private float currentPreviewVolume = 1f;
+
 
     public AudioMixerGroup SfxMixerGroup => sfxMixerGroup;
 
     [Header("Player - Ataque")]
-    [SerializeField] private AudioClip[] attackClips;  
+    [SerializeField] private AudioClip[] attackClips;   
 
     [Header("Player - Daño recibido (DR)")]
     [SerializeField] private AudioClip[] damageClips;   
 
     [Header("Player - Salto")]
-    [SerializeField] private AudioClip[] jumpClips;     
+    [SerializeField] private AudioClip[] jumpClips;    
 
     [Header("Player - Pasos en césped")]
-    [SerializeField] private AudioClip[] grassClips;
+    [SerializeField] private AudioClip[] grassClips;   
 
     [Header("Boss: Serpiente")]
-    [SerializeField] private AudioClip snakeHiss;     
-    [SerializeField] private AudioClip snakeAttack;     
+    [SerializeField] private AudioClip snakeHiss;      
+    [SerializeField] private AudioClip snakeAttack;    
 
     [Header("Boss: Oso (Trif)")]
-    [SerializeField] private AudioClip trifGrowlCalm;   
+    [SerializeField] private AudioClip trifGrowlCalm;  
     [SerializeField] private AudioClip trifGrowlAttack; 
 
     [Header("Configuración de reproducción")]
@@ -68,15 +70,28 @@ public class SFXManager : MonoBehaviour
 
     private void Start()
     {
-        float saved = PlayerPrefs.GetFloat(SFX_VOLUME_PREF_KEY, 1f);
-        SetSFXVolume(saved);
+        float saved = GetSavedSFXVolume();
+        PreviewSFXVolume(saved);
     }
-    public void SetSFXVolume(float normalizedVolume)
+
+    public void PreviewSFXVolume(float normalizedVolume)
     {
         normalizedVolume = Mathf.Clamp(normalizedVolume, 0.0001f, 1f);
+        currentPreviewVolume = normalizedVolume;
         float dB = Mathf.Log10(normalizedVolume) * 20f;
         sfxMixer.SetFloat(SFX_VOLUME_PARAM, dB);
-        PlayerPrefs.SetFloat(SFX_VOLUME_PREF_KEY, normalizedVolume);
+    }
+
+    public void CommitSFXVolume()
+    {
+        PlayerPrefs.SetFloat(SFX_VOLUME_PREF_KEY, currentPreviewVolume);
+    }
+
+    public float RevertSFXVolume()
+    {
+        float saved = GetSavedSFXVolume();
+        PreviewSFXVolume(saved);
+        return saved;
     }
     public float GetSavedSFXVolume()
     {
@@ -108,6 +123,7 @@ public class SFXManager : MonoBehaviour
         return index;
     }
 
+
     public void PlayAttack()
     {
         if (attackClips == null || attackClips.Length == 0) return;
@@ -138,8 +154,8 @@ public class SFXManager : MonoBehaviour
 
 
     public void PlaySnakeAttack() => PlayOneShotWithPitch(snakeAttack);
-    public AudioClip GetSnakeHissClip() => snakeHiss;
 
+    public AudioClip GetSnakeHissClip() => snakeHiss;
 
     public void PlayTrifGrowlCalm() => PlayOneShotWithPitch(trifGrowlCalm);
 
