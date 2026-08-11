@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int maxHealth = 5;
+    [SerializeField] private int maxHealth = 100;
     [SerializeField] private HealthBar healthBar;
+    private Rigidbody2D rb;
+    private PlayerMovement playerMovement;
 
     private int currentHealth;
 
@@ -15,10 +17,14 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int flashCount = 3;
 
     private Color normalColor;
+    public bool waterDie = false;
 
     private void Awake()
     {
         currentHealth = maxHealth;
+
+        rb = GetComponent<Rigidbody2D>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     private void Start()
@@ -84,7 +90,17 @@ public class PlayerHealth : MonoBehaviour
     {
         isDead = true;
         Debug.Log("GusGus murió.");
-        animator.SetTrigger("die");
+        if (waterDie)
+        {
+            animator.SetTrigger("waterDie");
+        }
+        else
+        {
+            animator.SetTrigger("die");
+        }
+
+        if (rb != null) { rb.velocity = Vector2.zero; }
+        if (playerMovement != null) { playerMovement.enabled = false; }
 
         if (GameManager.Instance != null)
         {
@@ -95,7 +111,7 @@ public class PlayerHealth : MonoBehaviour
 
     private IEnumerator ShowGameOverAfterDelay()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
 
         GameManager.Instance?.GameOver();
     }
