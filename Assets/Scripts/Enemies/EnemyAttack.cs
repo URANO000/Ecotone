@@ -17,11 +17,6 @@ public class EnemyAttack : MonoBehaviour
 
     private void Update()
     {
-        if (animator != null)
-        {
-            animator.SetTrigger("Attack");
-        }
-
         if (enemyBrain == null || enemyBrain.Player == null)
         {
             return;
@@ -37,20 +32,22 @@ public class EnemyAttack : MonoBehaviour
             return;
         }
 
-        PlayerHealth playerHealth = enemyBrain.Player.GetComponent<PlayerHealth>();
+        PlayerHealth playerHealth =
+            enemyBrain.Player.GetComponent<PlayerHealth>();
 
         if (playerHealth != null)
         {
             if (animator != null)
             {
+                animator.SetBool("Running", false);
                 animator.SetTrigger("Attack");
             }
 
             playerHealth.TakeDamage(damage);
 
             Debug.Log("El enemigo atacó.");
-        }
 
-        nextAttackTime = Time.time + attackCooldown;
+            nextAttackTime = Time.time + attackCooldown;
+        }
     }
 }
