@@ -13,8 +13,8 @@ public class PlayerHealth : MonoBehaviour
     public Animator animator;
 
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private float flashDuration = 0.15f;
-    [SerializeField] private int flashCount = 3;
+    private float flashDuration = 0.15f;
+    private int flashCount = 3;
 
     private Color normalColor;
     public bool waterDie = false;
