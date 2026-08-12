@@ -1224,6 +1224,7 @@ MonoBehaviour:
   winPanel: {fileID: 70028038}
   winReiniciarButton: {fileID: 803716241}
   winMenuButton: {fileID: 492293907}
+  healthBarCanvas: {fileID: 0}
 --- !u!1 &92769905
 GameObject:
   m_ObjectHideFlags: 0
@@ -21327,7 +21328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7fd9b28ddb53141af356cca1cf1a46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 4
+  maxHealth: 80
   destroyDelay: 1.2
 --- !u!50 &335131621
 Rigidbody2D:
@@ -21417,10 +21418,10 @@ MonoBehaviour:
   pointB: {fileID: 463717862}
   patrolSpeed: 1
   detectionRange: 2.6
-  chaseSpeed: 1.5
+  chaseSpeed: 2
   attackPoint: {fileID: 376492069}
   attackRange: 0.8
-  damage: 1
+  damage: 10
   attackCooldown: 2
   spriteFacesRight: 1
 --- !u!95 &335131624
@@ -25757,8 +25758,8 @@ Transform:
   m_GameObject: {fileID: 786068758}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.4140244, y: -6.49, z: -0.06588092}
-  m_LocalScale: {x: 5, y: 8, z: 1}
+  m_LocalPosition: {x: -7.2088, y: -4.1635, z: -0.06588092}
+  m_LocalScale: {x: 10.832353, y: 19.873238, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1205257758}
@@ -27731,6 +27732,12 @@ MonoBehaviour:
   trifGrowlAttack: {fileID: 8300000, guid: 838ae6600b232864d8ecb3cdb15609ea, type: 3}
   maxOneShotSources: 6
   pitchRandomRange: 0.05
+  symbolChimeClips: []
+  puzzleClickClip: {fileID: 0}
+  puzzleCorrectClip: {fileID: 0}
+  puzzleWrongClip: {fileID: 0}
+  puzzleSuccessClip: {fileID: 0}
+  puzzleFailClip: {fileID: 0}
 --- !u!4 &1037986780
 Transform:
   m_ObjectHideFlags: 0
@@ -28401,11 +28408,38 @@ MonoBehaviour:
   showDelay: 0.7
   highlightColor: {r: 1, g: 1, b: 1, a: 1}
   idleColor: {r: 1, g: 1, b: 1, a: 0.4}
+  symbolGlows: []
+  buttonIcons: []
+  panelRoot: {fileID: 0}
+  correctFlashColor: {r: 0.4, g: 1, b: 0.5, a: 1}
+  wrongFlashColor: {r: 1, g: 0.35, b: 0.35, a: 1}
+  onIconLit:
+    m_PersistentCalls:
+      m_Calls: []
+  onButtonClicked:
+    m_PersistentCalls:
+      m_Calls: []
+  onCorrectPress:
+    m_PersistentCalls:
+      m_Calls: []
+  onWrongPress:
+    m_PersistentCalls:
+      m_Calls: []
+  onSuccess:
+    m_PersistentCalls:
+      m_Calls: []
+  onFail:
+    m_PersistentCalls:
+      m_Calls: []
   successPanel: {fileID: 267155437}
   failPanel: {fileID: 1169103547}
   targetObstacle: {fileID: 615674939}
   cameraController: {fileID: 1963761532}
   puzzleCanvas: {fileID: 1098051193}
+  useIdlePulse: 1
+  idlePulseMinAlpha: 0.12
+  idlePulseMaxAlpha: 0.28
+  idlePulseDuration: 2
 --- !u!1 &1106095961
 GameObject:
   m_ObjectHideFlags: 0
@@ -29068,7 +29102,7 @@ Transform:
   m_GameObject: {fileID: 1128357043}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.17, y: 0.808, z: 0}
+  m_LocalPosition: {x: 72.9, y: -4.4, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -29308,7 +29342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPoint: {fileID: 1295118664}
   attackRange: 0.3
-  knockbackForce: 10
+  knockbackForce: 3
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
