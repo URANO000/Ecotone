@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int maxHealth = 100;
+    private int maxHealth = 100;
     [SerializeField] private HealthBar healthBar;
     private Rigidbody2D rb;
     private PlayerMovement playerMovement;
