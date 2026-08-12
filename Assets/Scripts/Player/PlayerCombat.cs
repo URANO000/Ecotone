@@ -4,9 +4,9 @@ public class PlayerCombat : MonoBehaviour
 {
     public Transform attackPoint;
     public float attackRange = 0.3f;
-    public float knockbackForce = 5;
+    private float knockbackForce = 2;
     public LayerMask enemyLayer;
-    public int damage = 7;
+    private int damage = 7;
 
     public Animator animator;
     public PlayerAudio playerAudio;
@@ -62,8 +62,19 @@ public class PlayerCombat : MonoBehaviour
                 {
                     damage = 15;
                 }
-                enemies[0].GetComponent<EnemyHealth>().TakeDamage(damage);
-                enemies[0].GetComponent<EnemyKnockback>().Knockback(transform, knockbackForce);
+                EnemyHealth enemyHealth = enemies[0].GetComponent<EnemyHealth>();
+
+                if (enemyHealth != null)
+                {
+                    enemyHealth.TakeDamage(damage);
+                }
+
+                EnemyKnockback enemyKnockback = enemies[0].GetComponent<EnemyKnockback>();
+
+                if (enemyKnockback != null)
+                {
+                    enemyKnockback.Knockback(transform, knockbackForce);
+                }
             }
 
             timer = cooldown;
