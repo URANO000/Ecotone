@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
     public Button winReiniciarButton;
     public Button winMenuButton;
 
+    [Header("Gameplay HUD")]
+    public GameObject healthBarCanvas;
+
     private bool gameOverActivo = false;
     private bool winActivo = false;
 
@@ -43,6 +46,11 @@ public class GameManager : MonoBehaviour
         if (winPanel != null)
         {
             winPanel.SetActive(false);
+        }
+
+        if (healthBarCanvas != null)
+        {
+            healthBarCanvas.SetActive(true);
         }
 
         if (reiniciarButton != null)
@@ -77,6 +85,11 @@ public class GameManager : MonoBehaviour
             gameOverPanel.SetActive(true);
         }
 
+        if (healthBarCanvas != null)
+        {
+            healthBarCanvas.SetActive(false);
+        }
+
         Time.timeScale = 0f;
     }
 
@@ -89,6 +102,11 @@ public class GameManager : MonoBehaviour
         if (winPanel != null)
         {
             winPanel.SetActive(true);
+        }
+
+        if (healthBarCanvas != null)
+        {
+            healthBarCanvas.SetActive(false);
         }
 
         Time.timeScale = 0f;
