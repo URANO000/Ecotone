@@ -106,4 +106,16 @@ public class MusicManager : MonoBehaviour
         musicSource.time = Mathf.Min(timeBeforePause, Mathf.Max(0f, clipBeforePause.length - 0.05f));
         musicSource.Play();
     }
+
+    public void PauseZoneMusic()
+    {
+        if (musicSource.isPlaying)
+            musicSource.Pause();
+    }
+
+    public void UnpauseZoneMusic()
+    {
+        if (!musicSource.isPlaying)
+            musicSource.UnPause();
+    }
 }

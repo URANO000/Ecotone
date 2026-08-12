@@ -13,28 +13,27 @@ public class SFXManager : MonoBehaviour
 
     private float currentPreviewVolume = 1f;
 
-
     public AudioMixerGroup SfxMixerGroup => sfxMixerGroup;
 
     [Header("Player - Ataque")]
-    [SerializeField] private AudioClip[] attackClips;   
+    [SerializeField] private AudioClip[] attackClips;
 
     [Header("Player - Daño recibido (DR)")]
-    [SerializeField] private AudioClip[] damageClips;   
+    [SerializeField] private AudioClip[] damageClips;
 
     [Header("Player - Salto")]
-    [SerializeField] private AudioClip[] jumpClips;    
+    [SerializeField] private AudioClip[] jumpClips;
 
     [Header("Player - Pasos en césped")]
-    [SerializeField] private AudioClip[] grassClips;   
+    [SerializeField] private AudioClip[] grassClips;
 
     [Header("Boss: Serpiente")]
-    [SerializeField] private AudioClip snakeHiss;      
-    [SerializeField] private AudioClip snakeAttack;    
+    [SerializeField] private AudioClip snakeHiss;
+    [SerializeField] private AudioClip snakeAttack;
 
     [Header("Boss: Oso (Trif)")]
-    [SerializeField] private AudioClip trifGrowlCalm;  
-    [SerializeField] private AudioClip trifGrowlAttack; 
+    [SerializeField] private AudioClip trifGrowlCalm;
+    [SerializeField] private AudioClip trifGrowlAttack;
 
     [Header("Configuración de reproducción")]
     [SerializeField] private int maxOneShotSources = 6;
@@ -46,6 +45,24 @@ public class SFXManager : MonoBehaviour
     private int lastAttackIndex = -1;
     private int lastDamageIndex = -1;
     private int lastGrassIndex = -1;
+
+    [Header("Puzzle: Sello del Bosque")]
+    [SerializeField] private AudioClip[] symbolChimeClips;
+    [SerializeField] private AudioClip puzzleClickClip;
+    [SerializeField] private AudioClip puzzleCorrectClip;
+    [SerializeField] private AudioClip puzzleWrongClip;
+    [SerializeField] private AudioClip puzzleSuccessClip;
+    [SerializeField] private AudioClip puzzleFailClip;
+
+    public enum PuzzleSoundType
+    {
+        Click,
+        Correct,
+        Wrong,
+        Success,
+        Fail,
+        SymbolChime 
+    }
 
     private void Awake()
     {
@@ -62,7 +79,7 @@ public class SFXManager : MonoBehaviour
         {
             var src = gameObject.AddComponent<AudioSource>();
             src.playOnAwake = false;
-            src.spatialBlend = 0f; 
+            src.spatialBlend = 0f;
             src.outputAudioMixerGroup = sfxMixerGroup;
             oneShotPool[i] = src;
         }
@@ -93,6 +110,7 @@ public class SFXManager : MonoBehaviour
         PreviewSFXVolume(saved);
         return saved;
     }
+
     public float GetSavedSFXVolume()
     {
         return PlayerPrefs.GetFloat(SFX_VOLUME_PREF_KEY, 1f);
@@ -107,11 +125,16 @@ public class SFXManager : MonoBehaviour
 
     private void PlayOneShotWithPitch(AudioClip clip, float volume = 1f)
     {
-        if (clip == null) return;
+        if (clip == null)
+        {
+            Debug.LogWarning("SFXManager: Intento de reproducir un AudioClip nulo");
+            return;
+        }
         var src = GetNextSource();
         src.pitch = 1f + Random.Range(-pitchRandomRange, pitchRandomRange);
         src.PlayOneShot(clip, volume);
     }
+
     private int GetRandomIndexNoRepeat(int arrayLength, int lastIndex)
     {
         if (arrayLength <= 1) return 0;
@@ -154,10 +177,51 @@ public class SFXManager : MonoBehaviour
 
 
     public void PlaySnakeAttack() => PlayOneShotWithPitch(snakeAttack);
-
     public AudioClip GetSnakeHissClip() => snakeHiss;
 
     public void PlayTrifGrowlCalm() => PlayOneShotWithPitch(trifGrowlCalm);
-
     public void PlayTrifGrowlAttack() => PlayOneShotWithPitch(trifGrowlAttack);
+
+    public void PlayPuzzleSound(PuzzleSoundType type, int symbolIndex = -1)
+    {
+        AudioClip clip = GetPuzzleClip(type, symbolIndex);
+        if (clip != null)
+            PlayOneShotWithPitch(clip);
+        else
+            Debug.LogWarning($"SFXManager: No se ha asignado el clip para {type}");
+    }
+
+    public AudioClip GetPuzzleClip(PuzzleSoundType type, int symbolIndex = -1)
+    {
+        switch (type)
+        {
+            case PuzzleSoundType.Click: return puzzleClickClip;
+            case PuzzleSoundType.Correct: return puzzleCorrectClip;
+            case PuzzleSoundType.Wrong: return puzzleWrongClip;
+            case PuzzleSoundType.Success: return puzzleSuccessClip;
+            case PuzzleSoundType.Fail: return puzzleFailClip;
+            case PuzzleSoundType.SymbolChime:
+                if (symbolIndex >= 0 && symbolIndex < symbolChimeClips.Length)
+                    return symbolChimeClips[symbolIndex];
+                Debug.LogWarning($"SFXManager: Índice de SymbolChime inválido: {symbolIndex}");
+                return null;
+            default: return null;
+        }
+    }
+
+    public void PlayPuzzleClick() => PlayPuzzleSound(PuzzleSoundType.Click);
+    public void PlayPuzzleCorrect() => PlayPuzzleSound(PuzzleSoundType.Correct);
+    public void PlayPuzzleWrong() => PlayPuzzleSound(PuzzleSoundType.Wrong);
+    public void PlayPuzzleSuccess() => PlayPuzzleSound(PuzzleSoundType.Success);
+    public void PlayPuzzleFail() => PlayPuzzleSound(PuzzleSoundType.Fail);
+
+    public void PlaySymbolChime(int index)
+    {
+        if (symbolChimeClips == null || index < 0 || index >= symbolChimeClips.Length)
+        {
+            Debug.LogWarning($"SFXManager: SymbolChime index {index} fuera de rango o array nulo");
+            return;
+        }
+        PlayOneShotWithPitch(symbolChimeClips[index]);
+    }
 }
