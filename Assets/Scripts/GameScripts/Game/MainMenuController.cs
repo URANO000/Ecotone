@@ -8,6 +8,15 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private string optionsMenuSceneName = "OptionMenu";
     [SerializeField] private string mainMenuSceneName = "MainMenu";
 
+    [Header("Music")]
+    [SerializeField] private AudioClip mainMenuMusic;
+
+    private void Start()
+    {
+        if (MusicManager.Instance != null)
+            MusicManager.Instance.PlayTrack(mainMenuMusic);
+    }
+
     public void StartGame()
     {
         SceneManager.LoadScene(firstLevelSceneName);
@@ -26,7 +35,6 @@ public class MainMenuController : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
-
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif

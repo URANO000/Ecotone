@@ -22133,9 +22133,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1978428121}
-  - {fileID: 1234143492}
-  - {fileID: 1921494874}
-  - {fileID: 665410914}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &376572967
@@ -25437,12 +25434,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 665410913}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -662.75, y: -374.8, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 154.84045, y: -9.398132, z: 6.789625}
   m_LocalScale: {x: 46.5, y: 36.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 376572966}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &665410915
 MonoBehaviour:
@@ -25458,6 +25455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zoneClip: {fileID: 8300000, guid: 9177e4b777adef946b9536ed879d832f, type: 3}
   zoneVolume: 0.41
+  zoneCollider: {fileID: 665410916}
 --- !u!61 &665410916
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -30936,12 +30934,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1234143491}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -780.61, y: -375.03, z: 0}
-  m_LocalScale: {x: 92.3, y: 36.33, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 36.98047, y: -9.628143, z: 6.789625}
+  m_LocalScale: {x: 95.09, y: 36.33, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 376572966}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1234143493
 MonoBehaviour:
@@ -30957,6 +30955,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zoneClip: {fileID: 8300000, guid: b6ecafd855dae15468f7075d60f07ded, type: 3}
   zoneVolume: 1
+  zoneCollider: {fileID: 1234143494}
 --- !u!61 &1234143494
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -82522,7 +82521,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1658776906
 RectTransform:
   m_ObjectHideFlags: 0
@@ -84989,12 +84988,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921494873}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -709.7, y: -374.8, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 107.89044, y: -9.398132, z: 6.789625}
   m_LocalScale: {x: 46.5, y: 36.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 376572966}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1921494875
 MonoBehaviour:
@@ -85010,6 +85009,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zoneClip: {fileID: 8300000, guid: 7528052281ee6f345894967e7990caba, type: 3}
   zoneVolume: 1
+  zoneCollider: {fileID: 1921494876}
 --- !u!61 &1921494876
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -88513,5 +88513,8 @@ SceneRoots:
   - {fileID: 1628875062}
   - {fileID: 573942261}
   - {fileID: 376572966}
+  - {fileID: 1234143492}
+  - {fileID: 1921494874}
+  - {fileID: 665410914}
   - {fileID: 1037986780}
   - {fileID: 625346525}
